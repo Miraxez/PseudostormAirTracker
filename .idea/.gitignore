@@ -1,3 +1,5 @@
 
 # Default ignored files
+.git/
 /workspace.xml
+.idea/
