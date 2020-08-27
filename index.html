@@ -1,348 +1,220 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<title> Тестовая версия</title>
 	<!-- Кодировка веб-страницы -->
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
 	<!-- Подключаем CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="https://js.arcgis.com/4.13/esri/css/main.css">
-	<script src="https://js.arcgis.com/4.13/"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-
-    <!-- Подключаем карту -->
-    
-</head>
-<body>
-
-	<div class="container">
-		<div class="row">
-		<!-- Блок входных данных -->
-		    <div class="col-sm-5">
-		    	<!-- Блок формы -->
-		    	<div class="input-form">
-		    		<div class="input-form-margin">
-				    	<div class="form-group">
-						  	<label for="exampleInputEmail1">Aircraft Identificator (icao24)</label>
-						    <input type="number" class="form-control" id="exampleInputEmail1" placeholder="search" aria-describedby="emailHelp">
-						</div>
-						<label>Time interval</label>
-						<div class="form-row">
-						    <div class="form-group col-md-6">
-						      <input type="date" class="form-control" id="inputEmail4">
-						    </div>
-						    <div class="form-group col-md-6">
-						      <input type="date" class="form-control" id="inputPassword4">
-						    </div>
-						</div>
-						<button class="btn btn-primary" >Search</button>
-					</div>
-				</div>
-
-				<!-- Блок таблицы -->
-				<div class="table-left table-responsive">
-					<table class="table-sm table-striped table-bordered">
-					  <thead>
-					    <tr>
-					      <th scope="col">Чёт 1</th>
-					      <th scope="col">Чёт 2</th>
-					      <th scope="col">Чёт 3</th>
-					      <th scope="col">Чёт 4</th>
-					      <th scope="col">Чёт 5</th>
-					      <th scope="col">Чёт 6</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-					    <tr>
-					      <th scope="row">1</th>
-					      <td>Mark</td>
-					      <td>Otto</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">2</th>
-					      <td>Mark</td>
-					      <td>Otto</td>
-					      <td>@TwBootstrap</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">3</th>
-					      <td>Jacob</td>
-					      <td>Thornton</td>
-					      <td>@fat</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">4</th>
-					      <td >Larry</td>
-					      <td>@twitter</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">5</th>
-					      <td >Larry</td>
-					      <td>@twitter</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">6</th>
-					      <td >Larry</td>
-					      <td>@twitter</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">7</th>
-					      <td >Larry</td>
-					      <td>@twitter</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">8</th>
-					      <td >Larry</td>
-					      <td>@twitter</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">9</th>
-					      <td >Larry</td>
-					      <td>@twitter</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">10</th>
-					      <td >Larry</td>
-					      <td>@twitter</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">11</th>
-					      <td >Larry</td>
-					      <td>@twitter</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">12</th>
-					      <td >Larry</td>
-					      <td>@twitter</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">13</th>
-					      <td >Larry</td>
-					      <td>@twitter</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					      <td>@mdo</td>
-					    </tr>
-					  </tbody>
-					</table>
-				</div>
-		    </div>
-
-		    <!-- Блок карты -->
-		    <div class="col-sm-7">
-		      <div class="map" id="map">
-		      
-		      </div>
-		    </div>
-  		</div>
-	</div>
-
 	<!-- Подключаем jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Подключаем Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous" ></script>
 
+	<style>
+	#map {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+    }</style>
+    <!-- Подключаем карту -->
+    <link rel="stylesheet" href="https://js.arcgis.com/4.16/esri/css/main.css">
+    <script src="https://js.arcgis.com/4.16/"></script>
+
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+		<!-- Блок входных данных -->
+		    <div class="col-sm-4 mb-sm-0 left-menu">
+
+		    </div>
+
+		    <!-- Блок карты -->
+		    <div class="col-sm-8 div-map">
+		      <div id="map">
+		      
+		      </div>
+		    </div>
+  		</div>
+  		<div class="right-menu">
+  			<div class="holding"> 
+  			</div>
+  			<div class="right-menu-table">
+		  		<table class="table-sm table-info">
+				  <thead>
+				    <tr>
+				      <th>Time</th>
+				      <th>Latitude</th>
+				      <th>Longitude</th>
+				      <th>Atitude</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr>
+				      <td>11</td>
+				      <td>22</td>
+				      <td>33</td>
+				      <td>44</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				    <tr>
+				      <td>1</td>
+				      <td>2</td>
+				      <td>3</td>
+				      <td>4</td>
+				    </tr>
+				  </tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
     <!-- Подключаем основной скрипт -->
 	<script src="js/main.js"></script>
-	<script>
-		var pointGraphic = {};
-		pointGraphic.point = [];
-		pointGraphic.longitude = [];
-		pointGraphic.latitude = [];
-
-		const minLatitude=-90;
-		const maxLatitude=90;
-		const minLongitude=-180;
-		const maxLongitude=180;
-		const maxCoordinateDelta=20;
-		const numberOfPoints=30;
-
-		let points =[];
-
-		require([
-			"esri/Map",
-			"esri/views/MapView",
-			"esri/Graphic",
-			"esri/layers/GraphicsLayer"
-		], function(Map, MapView, Graphic, GraphicsLayer) {
-
-			var map = new Map({
-				basemap: "topo-vector"
-			});
-
-			var view = new MapView({
-				container: "viewDiv",
-				map: map,
-				center: [0, 0],
-				zoom: 2
-			});
-
-			var simpleMarkerSymbol = {
-				type: "simple-marker",
-				color: [0, 0, 0],
-				size: 5,
-				outline: {
-					color: [255, 255, 255],
-					width: 1
-				}
-			};
-
-			var simpleLineSymbol = {
-				type: "simple-line",
-				color: [226, 119, 40], // orange
-				width: 1
-			};
-
-
-			/*var routeTask = new RouteTask({
-                url: "https://utility.arcgis.com/usrsvcs/appservices/Miraxez/rest/services/World/Route/NAServer/Route_World/solve"
-            });*/
-
-			for (var i = 0; i < numberOfPoints; i++) {
-				if (i==0){
-					pointGraphic.longitude[i]  = getRandomLongitude();
-					pointGraphic.latitude[i]  = getRandomLatitude();
-				}
-				else {
-					pointGraphic.longitude[i]  = getNextLongitude(pointGraphic.longitude[i-1], maxCoordinateDelta);
-					pointGraphic.latitude[i]  = getNextLatitude(pointGraphic.latitude[i-1],maxCoordinateDelta);
-					console.log(pointGraphic.latitude[i], pointGraphic.longitude[i])
-				}
-				var point = {
-					type: "point",
-					longitude: pointGraphic.longitude[i],
-					latitude: pointGraphic.latitude[i]
-				};
-
-				points.push(point);
-
-
-
-			}
-			drawPolyline(points, map, GraphicsLayer);
-			getCenter(pointGraphic, view);
-
-			function drawPolyline(points) {
-				let graphicsLayer = new GraphicsLayer();
-				map.add(graphicsLayer);
-
-				points.forEach(function(point, i, points){
-					pointGraphic.point[i] = new Graphic({
-						geometry: point,
-						symbol: simpleMarkerSymbol
-					});
-
-					if (i > 0) {
-
-						var polyline = {
-							type: "polyline",
-							paths: [
-								[pointGraphic.longitude[i-1], pointGraphic.latitude[i-1]],
-								[pointGraphic.longitude[i], pointGraphic.latitude[i]]
-							]
-						};
-
-						var polylineGraphic = new Graphic({
-							geometry: polyline,
-							symbol: simpleLineSymbol
-						})
-					}
-					graphicsLayer.add(pointGraphic.point[i]);
-					graphicsLayer.add(polylineGraphic);
-				});
-
-			}
-
-		});
-
-
-
-		function getRandomLatitude() {
-			return (getRandomFloat(minLatitude,maxLatitude));
-		}
-
-		function getRandomLongitude() {
-			return (getRandomFloat(minLongitude,maxLongitude));
-		}
-
-		function getRandomFloat(min, max) {
-			return (Math.random()* max-min + min);
-		}
-
-		function getNextLatitude(previousLatitude, maxDelta) {
-			let nextLatitude = getNextCoordinate(previousLatitude,maxDelta,minLatitude,maxLatitude);
-			return nextLatitude;
-		}
-
-		function getNextLongitude(previousLongitude, maxDelta) {
-			let nextLongitude = getNextCoordinate(previousLongitude, maxDelta, minLongitude, maxLongitude);
-			return nextLongitude;
-		}
-
-		function getChangedValue(previousValue, maxDelta) {
-			return (Math.random() * 2 * maxDelta - maxDelta + previousValue);
-		}
-
-		function getNextCoordinate(previousCoordinate, maxDelta, minCoordinateValue, maxCoordinateValue) {
-			let nextCoordinate = getChangedValue(previousCoordinate,maxDelta);
-			while ((nextCoordinate < minCoordinateValue) || (nextCoordinate > maxCoordinateValue)) {
-				nextCoordinate = getChangedValue(previousCoordinate,maxDelta);
-			}
-			return nextCoordinate;
-		}
-
-		function getCenter(Coordinate, View) {
-			let maxLongitude = Coordinate.longitude[0], minLongitude = Coordinate.longitude[0];
-			let maxLatitude = Coordinate.latitude[0], minLatitude = Coordinate.latitude[0];
-			for (let i = 0; i < Coordinate.latitude.length; i++) {
-				if (Coordinate.latitude[i] > maxLatitude) maxLatitude = Coordinate.latitude[i];
-				if (Coordinate.latitude[i] < minLatitude) minLatitude = Coordinate.latitude[i];
-				if (Coordinate.longitude[i] > maxLongitude) maxLongitude = Coordinate.longitude[i];
-				if (Coordinate.longitude[i] < minLongitude) minLongitude = Coordinate.longitude[i];
-			}
-			View.center = [(maxLongitude + minLongitude)/2, (maxLatitude + minLatitude)/2];
-		}
-
-	</script>
-
+	<script src="js/menu.js"></script>
+	<script src="js/ajax.js"></script>
 
 </body>
 </html>
