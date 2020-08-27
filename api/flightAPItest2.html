@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>ArcGIS JavaScript Tutorials: Create a Starter App</title>
+    <style>
+    html, body, #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+    }
+</style>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.13/esri/css/main.css">
+    <script src="https://js.arcgis.com/4.13/"></script>
+
+    <script>
+        var pointGraphic = {};
+        pointGraphic.point = [];
+        pointGraphic.longitude = [];
+        pointGraphic.latitude = [];
+
+        const minLatitude=-90;
+        const maxLatitude=90;
+        const minLongitude=-180;
+        const maxLongitude=180;
+        const maxCoordinateDelta=20;
+        const numberOfPoints=30;
+
+        let points =[];
+
+        require([
+            "esri/Map",
+            "esri/views/MapView",
+            "esri/Graphic",
+            "esri/layers/GraphicsLayer"
+        ], function(Map, MapView, Graphic, GraphicsLayer) {
+
+            var map = new Map({
+                basemap: "topo-vector"
+            });
+
+            var view = new MapView({
+                container: "viewDiv",
+                map: map,
+                center: [0, 0],
+                zoom: 2
+            });
+
+            var simpleMarkerSymbol = {
+                type: "simple-marker",
+                color: [0, 0, 0],
+                size: 5,
+                outline: {
+                    color: [255, 255, 255],
+                    width: 1
+                }
+            };
+
+            var simpleLineSymbol = {
+                type: "simple-line",
+                color: [226, 119, 40], // orange
+                width: 1
+            };
+
+
+            /*var routeTask = new RouteTask({
+                url: "https://utility.arcgis.com/usrsvcs/appservices/Miraxez/rest/services/World/Route/NAServer/Route_World/solve"
+            });*/
+            /*
+                        for (var i = 0; i < numberOfPoints; i++) {
+                            if (i==0){
+                                pointGraphic.longitude[i]  = getRandomLongitude();
+                                pointGraphic.latitude[i]  = getRandomLatitude();
+                            }
+                            else {
+                                pointGraphic.longitude[i]  = getNextLongitude(pointGraphic.longitude[i-1], maxCoordinateDelta);
+                                pointGraphic.latitude[i]  = getNextLatitude(pointGraphic.latitude[i-1],maxCoordinateDelta);
+                                console.log(pointGraphic.latitude[i], pointGraphic.longitude[i])
+                            }
+                            var point = {
+                                type: "point",
+                                longitude: pointGraphic.longitude[i],
+                                latitude: pointGraphic.latitude[i]
+                            };
+
+                            points.push(point);
+
+                        }
+                        */
+
+            let normalStartDate = new Date();
+            normalStartDate.setDate(normalStartDate.getDate()-6);
+            let normalEndDate = new Date(normalStartDate);
+            normalEndDate.setHours(normalEndDate.getHours()+1);
+            let endDate = getUnixTimestamp(normalEndDate);
+            let  beginDate = getUnixTimestamp(normalStartDate);
+            console.log(normalStartDate, normalEndDate, endDate, beginDate);
+
+            getAllFlightsWithinDateRange(beginDate,endDate);
+
+
+            getCenter(pointGraphic, view);
+
+            function drawPolyline(points) {
+                console.log(points);
+                let graphicsLayer = new GraphicsLayer();
+                map.add(graphicsLayer);
+
+                points.forEach(function(point, i, points){
+                    pointGraphic.point[i] = new Graphic({
+                        geometry: point,
+                        symbol: simpleMarkerSymbol
+                    });
+
+                    if (i > 0) {
+
+                        var polyline = {
+                            type: "polyline",
+                            paths: [
+                                [pointGraphic.longitude[i-1], pointGraphic.latitude[i-1]],
+                                [pointGraphic.longitude[i], pointGraphic.latitude[i]]
+                            ]
+                        };
+
+                        var polylineGraphic = new Graphic({
+                            geometry: polyline,
+                            symbol: simpleLineSymbol
+                        })
+                    }
+                    graphicsLayer.add(pointGraphic.point[i]);
+                    graphicsLayer.add(polylineGraphic);
+                });
+
+            }
+
+            function getFirstFlight(jsonFlightsArray) {
+            let icao = jsonFlightsArray[500].icao24;
+            let time = jsonFlightsArray[500].lastSeen-1;
+            getFlightByIcao(icao,time);
+        }
+
+        async function getFlightByIcao(icao,time){
+            let response = await fetch('https://opensky-network.org/api/tracks/all?icao24='+ icao +'&time=' +time, {
+                method: 'GET'
+            });
+            let myJson = await response.json().then((json) => {
+                //console.log('this is the json data', json[0]);
+                console.log(json);
+                turnTrackIntoPoints(json);
+            })
+        }
+
+        async function getAllFlightsWithinDateRange(begin,end){
+            let response = await fetch('https://opensky-network.org/api/flights/all?begin=' + begin + '&end='+ end, {
+                method: 'GET'
+            });
+            let myJson = await response.json().then((json) => {
+                console.log('this is the json data', json[0]);
+                console.log(json);
+                getFirstFlight(json);
+            })
+        }
+
+        function turnTrackIntoPoints(flightJson){
+            for (var i = 0; i < flightJson.path.length-1; i++) {
+                pointGraphic.longitude[i]  = flightJson.path[i][2];
+                pointGraphic.latitude[i]  = flightJson.path[i][1];
+                console.log(pointGraphic.longitude[i], pointGraphic.latitude[i]);
+
+                var point = {
+                    type: "point",
+                    longitude: pointGraphic.longitude[i],
+                    latitude: pointGraphic.latitude[i]
+                };
+
+                points.push(point);
+
+
+            }
+             drawPolyline(points, map, GraphicsLayer);
+        }
+
+        });
+
+
+
+        function getRandomLatitude() {
+            return (getRandomFloat(minLatitude,maxLatitude));
+        }
+
+        function getRandomLongitude() {
+            return (getRandomFloat(minLongitude,maxLongitude));
+        }
+
+        function getRandomFloat(min, max) {
+            return (Math.random()* max-min + min);
+        }
+
+        function getNextLatitude(previousLatitude, maxDelta) {
+            let nextLatitude = getNextCoordinate(previousLatitude,maxDelta,minLatitude,maxLatitude);
+            return nextLatitude;
+        }
+
+        function getNextLongitude(previousLongitude, maxDelta) {
+            let nextLongitude = getNextCoordinate(previousLongitude, maxDelta, minLongitude, maxLongitude);
+            return nextLongitude;
+        }
+
+        function getChangedValue(previousValue, maxDelta) {
+            return (Math.random() * 2 * maxDelta - maxDelta + previousValue);
+        }
+
+        function getNextCoordinate(previousCoordinate, maxDelta, minCoordinateValue, maxCoordinateValue) {
+            let nextCoordinate = getChangedValue(previousCoordinate,maxDelta);
+            while ((nextCoordinate < minCoordinateValue) || (nextCoordinate > maxCoordinateValue)) {
+                nextCoordinate = getChangedValue(previousCoordinate,maxDelta);
+            }
+            return nextCoordinate;
+        }
+
+        function getCenter(Coordinate, View) {
+            let maxLongitude = Coordinate.longitude[0], minLongitude = Coordinate.longitude[0];
+            let maxLatitude = Coordinate.latitude[0], minLatitude = Coordinate.latitude[0];
+            for (let i = 0; i < Coordinate.latitude.length; i++) {
+                if (Coordinate.latitude[i] > maxLatitude) maxLatitude = Coordinate.latitude[i];
+                if (Coordinate.latitude[i] < minLatitude) minLatitude = Coordinate.latitude[i];
+                if (Coordinate.longitude[i] > maxLongitude) maxLongitude = Coordinate.longitude[i];
+                if (Coordinate.longitude[i] < minLongitude) minLongitude = Coordinate.longitude[i];
+            }
+            View.center = [(maxLongitude + minLongitude)/2, (maxLatitude + minLatitude)/2];
+        }
+
+        function getUnixTimestamp(date) {
+            return  Math.round(date.getTime()/1000.0);
+
+        }
+
+
+
+    </script>
+</head>
+<body>
+<div id="viewDiv"></div>
+</body>
