@@ -2,14 +2,14 @@ let aircraftPoint;
 
 //Стартовое меню
 function left_menu_constructor() {
-  $('.right-menu').css({display:"none"});
-  $('.left-menu').empty();
-  if (prewGraphicAircraft) prewLayerAircraft.remove(prewGraphicAircraft);
-  if (list) {
-    console.log('Внутри');
-    $(".left-menu").append(list);
-  } else {
-    $('.left-menu').append(`
+    $('.right-menu').css({ display: "none" });
+    $('.left-menu').empty();
+    if (prewGraphicAircraft) prewLayerAircraft.remove(prewGraphicAircraft);
+    if (list) {
+        console.log('Внутри');
+        $(".left-menu").append(list);
+    } else {
+        $('.left-menu').append(`
       <!-- Блок формы -->
             <div class="input-form">
               <div class="input-form-margin">
@@ -64,18 +64,18 @@ function left_menu_constructor() {
               <button class="btn btn-primary btn-ok" onclick="add_menu_data()">Ok</button>
             </div>
           </div>`);
-    } 
-  resize_left_menu();
+    }
+    resize_left_menu();
 }
 
 // Открытие опредленного рейса
 function add_menu_data() {
-  if (coords) {
-    list = $('.left-menu').html();
-    $('.right-menu').css({display:"block"});
-    $('.left-menu').empty();
-    $('.left-menu').append(`
-          <img class="btn-return" onclick="left_menu_constructor()" src="img/arrow-left.png">
+    if (coords) {
+        list = $('.left-menu').html();
+        $('.right-menu').css({ display: "block" });
+        $('.left-menu').empty();
+        $('.left-menu').append(`
+          <img class="btn-return" onclick="left_menu_constructor()" src="static/img/arrow-left.png">
             <h6 class="left-menu-name head-text">Flight data</h4>
             <table class="table-2">
             <tr>
@@ -144,33 +144,33 @@ function add_menu_data() {
           </table>
           <div class="d-flex bd-highlight button-play">
             <div id="btn-play" class="p-2 bd-highlight btn-play" onclick="start()">
-              <img src="img/play.svg">
+              <img src="static/img/play.svg">
             </div>
             <div id="btn-speedUp" class="p-2 bd-highlight btn-play" onclick="speedUp()">
-              <img src="img/speed-up.svg">
+              <img src="static/img/speed-up.svg">
             </div>
             <div id="btn-pause" class="p-2 bd-highlight btn-play" onclick="pauseAircraft()">
-              <img src="img/pause.svg">
+              <img src="static/img/pause.svg">
             </div>
             <div id="btn-stop" class="p-2 bd-highlight btn-play" onclick="stop()">
-              <img src="img/stop.svg">
+              <img src="static/img/stop.svg">
             </div>
           </div>`);
-    resize_left_menu();
+        resize_left_menu();
 
-    //Создаем объект
-    aircraftPoint = {};
-    aircraftPoint.Latitude = coords[0][1];
-    aircraftPoint.Longitude = coords[0][0];
-    aircraftPoint.time = timePoints[0];
+        //Создаем объект
+        aircraftPoint = {};
+        aircraftPoint.Latitude = coords[0][1];
+        aircraftPoint.Longitude = coords[0][0];
+        aircraftPoint.time = timePoints[0];
 
-    $('.dataFlying-icao24').text(dataFlying.icao24);
-    $('.dataFlying-firstseen').text(dataFlying.firstseen);
-    $('.dataFlying-callsign').text(dataFlying.callsign);
-    $('.dataFlying-estdepartureairport').text(dataFlying.estdepartureairport);
-    $('.dataFlying-estarrivalairport').text(dataFlying.estarrivalairport);
-    $('.dataFlying-lastseen').text(dataFlying.lastseen);
+        $('.dataFlying-icao24').text(dataFlying.icao24);
+        $('.dataFlying-firstseen').text(dataFlying.firstseen);
+        $('.dataFlying-callsign').text(dataFlying.callsign);
+        $('.dataFlying-estdepartureairport').text(dataFlying.estdepartureairport);
+        $('.dataFlying-estarrivalairport').text(dataFlying.estarrivalairport);
+        $('.dataFlying-lastseen').text(dataFlying.lastseen);
 
-    addAircraft(aircraftPoint);
-  }
+        addAircraft(aircraftPoint);
+    }
 }
